@@ -22,7 +22,7 @@ public class Ejercicios05 {
         do{
             System.out.println("**************************************************");
             System.out.println("*  1. Array aleatoria                            *");
-            System.out.println("*  2. ...                                        *");
+            System.out.println("*  2. Posición numero en array aleatoria         *");
             System.out.println("*  3. ...                                        *");
             System.out.println("*  4. ...                                        *");
             System.out.println("*  5. ...                                        *");
@@ -31,7 +31,7 @@ public class Ejercicios05 {
             System.out.println("*  8. ...                                        *");
             System.out.println("*  9. ...                                        *");
             System.out.println("* 10. ...                                        *");
-            System.out.println("* 11. ...                                         *");
+            System.out.println("* 11. ...                                        *");
             System.out.println("*  0. Salir                                      *");
             System.out.println("**************************************************");
             entradaUsuario = teclado.nextLine();
@@ -93,9 +93,7 @@ public class Ejercicios05 {
         }
         while(tamArray < 0);
         int array[] = arrayAleatorio(tamArray);
-        for(int i = 0; i < array.length; i++){
-            System.out.println("posición " + i + " = " + array[i]);
-        }        
+        sumArray(array);
         System.out.println("Suma total = " + sumArray(array));
        
         
@@ -115,13 +113,94 @@ public class Ejercicios05 {
         }
         return result;
     }
-    
-    public static void ejercicio02(){
-        
+    public static void printArray(int[] array){
+        for(int i = 0; i < array.length; i++){
+            System.out.println("posición " + i + " = " + array[i]);
+        }         
     }
     
+    public static void ejercicio02(){
+        int array[] = arrayAleatorio20();
+        Scanner sc = new Scanner(System.in);
+        int num = -1;
+        do{
+            do{
+                System.out.println("Por favor, inserte un numero del 1 al 50, o 0 para salir:");
+                if(sc.hasNextInt()){
+                    num = sc.nextInt();                
+                }
+                if((num < 1 || num > 50) && num != 0){
+                    System.out.println("ERROR: Debe insertar un número del 1 al 50, o 0 para salir.");
+                }                
+            }
+            while((num < 1 || num > 50) && num != 0);
+                int pos = posicionNum(num, array);
+                if(pos == -1 && num != 0){
+                    System.out.println("El numero no existe en el array.");
+                }else if(pos > -1 && num != 0){
+                    System.out.printf("el numero %s esta en la posición %s\n", num, pos);
+                } 
+                sc.nextLine();
+        }
+        while(num != 0); 
+
+    }
+    public static int[] arrayAleatorio20(){
+        int result[];
+        result = new int[20];
+        for(int i = 0; i < result.length; i++){
+            result[i] = (int)(Math.random()*50 + 1);
+        }
+        return result;
+    }
+    public static int posicionNum(int n, int array[]){
+        for(int i = 0; i < array.length; i++){
+            if(array[i] == n){
+                return i;
+            }
+        }
+        return -1;        
+    }
     public static void ejercicio03(){
-        
+        Scanner sc = new Scanner(System.in);
+        int num = -1;
+        do{
+            System.out.println("Por favor, inserte un número:");
+            if(sc.hasNextInt()){
+                num = sc.nextInt();                
+            }
+            if(num < 0){
+                System.out.println("ERROR: Debe insertar un número natural.");
+            }
+            sc.nextLine();
+        }
+        while(num < 0); 
+        printArray(arrayAleatorio2(num));
+    }
+    public static int[] arrayAleatorio2(int n){
+        int result[];
+        result = new int[n];
+        boolean existe = false;
+        for(int i = 0; i < result.length; i++){            
+            do{
+                int a = (int)(Math.random()*n + 1);
+                existe = existeEnArray(a, result);
+                if(!existe){
+                    result[i] = a;
+                }
+               
+            }
+            while(existe);
+        }
+        return result;
+    }
+    public static boolean existeEnArray(int n, int[] array){
+        for(int f = 0; f < array.length; f++){
+            if(array[f] == n){
+                return true;
+            }
+        }
+        return false;
     }
     
     public static void ejercicio04(){
