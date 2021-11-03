@@ -259,7 +259,34 @@ public class Ejercicios05 {
     }
     
     public static void ejercicio06(){
-        
+        Scanner sc = new Scanner(System.in);
+        int num = -1;
+        do{
+            System.out.println("Por favor, introduce un numero de DNI:");
+            if(sc.hasNextInt()){
+                num = sc.nextInt();                
+            }
+            if(num < 0){
+                System.out.println("ERROR: Debe insertar un número natural.");
+            }
+            sc.nextLine();
+        }
+        while(num < 0);        
+        boolean[] criba = new boolean[num];
+        for(int i = 2; i < criba.length; i++){
+            if(criba[i] == false && Math.pow(i, 2) < num){
+                criba = tacharMultiplos(criba, i);
+            }
+        }
+    }
+    public static boolean[] tacharMultiplos(boolean[] array, int m){                
+        final boolean tachado = true;
+        for(int i = 2; i < array.length; i++){
+            if(i % m == 0){
+                array[i] = tachado;
+            }
+        }
+        return array;
     }
     
     public static void ejercicio07(){
