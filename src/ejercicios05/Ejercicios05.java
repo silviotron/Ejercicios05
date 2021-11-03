@@ -25,7 +25,7 @@ public class Ejercicios05 {
             System.out.println("*  2. Posición numero en array aleatoria         *");
             System.out.println("*  3. Array aleatorio sin repetidos              *");
             System.out.println("*  4. Calcular letra DNI                         *");
-            System.out.println("*  5. ...                                        *");
+            System.out.println("*  5. Bingo                                      *");
             System.out.println("*  6. ...                                        *");
             System.out.println("*  7. ...                                        *");
             System.out.println("*  8. ...                                        *");
@@ -225,7 +225,37 @@ public class Ejercicios05 {
     }
     
     public static void ejercicio05(){
-        
+        int[] listaArray = arrayAleatorio2(90);
+        int n = 1;
+        String num;
+        String lista = "" + listaArray[0];
+        Scanner sc = new Scanner(System.in);   
+        do{
+            System.out.println("1 - siguiente numero");
+            System.out.println("0 - salir");
+            num = sc.nextLine();
+            switch(num){
+                case "1":
+                    System.out.printf("Sale la bola: %s\n", listaArray[n-1]);
+                    System.out.printf("[" + lista + "]\n");
+                    lista = lista + ", " + listaArray[n];
+                    n++;
+                    if(n == 90){
+                        System.out.println("No hay mas bolas");
+                        break;
+                    }
+
+                    break;
+                case "0":
+                    break;
+                default:
+                    System.out.println("opcion incorrecta");
+                    break;
+            }
+       
+
+        }
+        while(!num.equals("0") && n != 90);
     }
     
     public static void ejercicio06(){
