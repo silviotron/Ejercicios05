@@ -23,8 +23,8 @@ public class Ejercicios05 {
             System.out.println("**************************************************");
             System.out.println("*  1. Array aleatoria                            *");
             System.out.println("*  2. Posición numero en array aleatoria         *");
-            System.out.println("*  3. ...                                        *");
-            System.out.println("*  4. ...                                        *");
+            System.out.println("*  3. Array aleatorio sin repetidos              *");
+            System.out.println("*  4. Calcular letra DNI                         *");
             System.out.println("*  5. ...                                        *");
             System.out.println("*  6. ...                                        *");
             System.out.println("*  7. ...                                        *");
@@ -204,7 +204,24 @@ public class Ejercicios05 {
     }
     
     public static void ejercicio04(){
-        
+        Scanner sc = new Scanner(System.in);
+        int num = -1;
+        do{
+            System.out.println("Por favor, introduce un numero de DNI:");
+            if(sc.hasNextInt()){
+                num = sc.nextInt();                
+            }
+            if(num < 0){
+                System.out.println("ERROR: Debe insertar un número natural.");
+            }
+            sc.nextLine();
+        }
+        while(num < 0);
+        System.out.printf("la letra del DNI: %s es %s\n", num, letraDni(num));
+    }
+    public static char letraDni(int n){
+        char[] dni = {'t', 'r', 'w', 'a', 'g', 'm', 'y', 'f', 'p', 'd', 'x', 'b', 'n', 'j', 'z', 's', 'q', 'v', 'h', 'l', 'c', 'k', 'e'};
+        return dni[n % 23];
     }
     
     public static void ejercicio05(){
