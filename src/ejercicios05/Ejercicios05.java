@@ -26,7 +26,7 @@ public class Ejercicios05 {
             System.out.println("*  3. Array aleatorio sin repetidos              *");
             System.out.println("*  4. Calcular letra DNI                         *");
             System.out.println("*  5. Bingo                                      *");
-            System.out.println("*  6. ...                                        *");
+            System.out.println("*  6. Primos                                     *");
             System.out.println("*  7. ...                                        *");
             System.out.println("*  8. ...                                        *");
             System.out.println("*  9. ...                                        *");
@@ -262,7 +262,7 @@ public class Ejercicios05 {
         Scanner sc = new Scanner(System.in);
         int num = -1;
         do{
-            System.out.println("Por favor, introduce un numero de DNI:");
+            System.out.print("Por favor, introduce un numero: ");
             if(sc.hasNextInt()){
                 num = sc.nextInt();                
             }
@@ -272,21 +272,42 @@ public class Ejercicios05 {
             sc.nextLine();
         }
         while(num < 0);        
-        boolean[] criba = new boolean[num];
+        boolean[] criba = new boolean[num + 1];
         for(int i = 2; i < criba.length; i++){
-            if(criba[i] == false && Math.pow(i, 2) < num){
+            if((criba[i] == false) && (Math.pow(i, 2) < num)){
                 criba = tacharMultiplos(criba, i);
             }
         }
+        int encontrados = encontrados(criba);
+        if(encontrados > 1){ 
+            System.out.printf("primos encontrados hasta el %s:\n(encontrados: %s) 2", num, encontrados); 
+        }else{
+            System.out.printf("no se han encontrados primos hasta el %s", num);
+        }       
+        for(int i = 3; i < criba.length; i++){
+            if(criba[i] == false){                
+                System.out.printf(", %s", i);
+            }
+        }
+        System.out.printf("\n");
     }
     public static boolean[] tacharMultiplos(boolean[] array, int m){                
         final boolean tachado = true;
-        for(int i = 2; i < array.length; i++){
+        for(int i = m + 1; i < array.length; i++){
             if(i % m == 0){
                 array[i] = tachado;
             }
         }
         return array;
+    }
+    public static int encontrados(boolean[] array){
+        int result = 0;
+        for(int i = 2; i < array.length; i++){
+            if(array[i] == false){
+                result++;
+            }
+        }
+        return result;
     }
     
     public static void ejercicio07(){
