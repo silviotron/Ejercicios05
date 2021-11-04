@@ -1,21 +1,22 @@
-04 - Ejercicios arrays básicos
+<h1>04 - Ejercicios arrays básicos</h1>
 
-Ejercicio 1
+<h2>Ejercicio 1</h2>
 
 Crea un array de números donde le indicamos por teclado el tamaño del array, rellenaremos el array con números aleatorios entre 0 y 9, al final muestra por pantalla el valor de cada posición y la suma de todos los valores. Haz un método para rellenar el array (que tenga como parámetros los números entre los que tenga que generar), para mostrar el contenido y la suma del array y un método privado para generar número aleatorio (lo puedes usar para otros ejercicios).
 
-Ejercicio 2
+<h2>Ejercicio 2</h2>
 
 Crea un array aleatorio de 20 posiciones con números comprendidos entre el 1..50. El usuario inserta un número y el programa debe decirle si existe el número en el array. Si existe muestra la primera posición en la que podemos encontrar el elemento.
 
-Ejercicio 3
+<h2>Ejercicio 3</h2>
 
 Crea un array de números aleatorios de un tamaño pasado como parámetro. El array se rellenará aleatoriamente con todos los números existentes entre 1 y el valor pasado. No puede haber repeticiones. Por ejemplo:
 
 Valor pasado 5
 [2,1,5,4,3] -> Correcto
 
-Ejercicio 4
+
+<h2>Ejercicio 4</h2>
 
 Calcula la letra de un DNI, pediremos el DNI por teclado y nos devolverá el DNI completo.
 
@@ -46,11 +47,11 @@ Posicion	Letra
 21--K<br>
 22--E<br>
 
-Ejercicio 5
+<h2>Ejercicio 5</h2>
 
 Crea un programa que simule un bingo. Cada vez que se pulse 1, el programa saca una bola del bombo (sin repetir) y muestra por pantalla las bolas que han salido en el orden en el que lo han hecho. Si se pulsa 0 el programa finaliza.
 
-Ejercicio 6
+<h2>Ejercicio 6</h2>
 
 Implementar en java un algoritmo que genere números primos hasta la cantidad máxima especificada por el usuario. Utilícese el algoritmo denominado Criba de erastóstes.<br>
 Descripción del algoritmo:<br>
