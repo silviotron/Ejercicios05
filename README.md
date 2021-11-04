@@ -21,17 +21,17 @@ Calcula la letra de un DNI, pediremos el DNI por teclado y nos devolverá el DNI
 
 Para calcular la letra, cogeremos el resto de dividir nuestro dni entre 23, el resultado debe estar entre 0 y 22. Haz un método donde según el resultado de la anterior formula busque en un array de caracteres la posición que corresponda a la letra. Esta es la tabla de caracteres:
 Posicion	Letra
-0	T
-1	R
-2	W
-3	A
-4	G
-5	M
-6	Y
-7	F
-8	P
-9	D
-10	X
+0	  T
+1	  R
+2	  W
+3	  A
+4	  G
+5	  M
+6	  Y
+7	  F
+8	  P
+9	  D
+10  X
 11	B
 12	N
 13	J
