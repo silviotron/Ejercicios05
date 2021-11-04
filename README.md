@@ -22,51 +22,29 @@ Calcula la letra de un DNI, pediremos el DNI por teclado y nos devolverá el DNI
 Para calcular la letra, cogeremos el resto de dividir nuestro dni entre 23, el resultado debe estar entre 0 y 22. Haz un método donde según el resultado de la anterior formula busque en un array de caracteres la posición que corresponda a la letra. Esta es la tabla de caracteres:
 Posicion	Letra
 
-0	  T
-
-1	  R
-
-2	  W
-
-3	  A
-
-4	  G
-
-5	  M
-
-6	  Y
-
-7	  F
-
-8	  P
-
-9	  D
-
-10  X
-
-11	B
-
-12	N
-
-13	J
-
-14	Z
-
-15	S
-
-16	Q
-
-17	V
-
-18	H
-
-19	L
-
-20	C
-
-21	K
-
-22	E
+0---T<br>
+1---R<br>
+2---W<br>
+3---A<br>
+4---G<br>
+5---M<br>
+6---Y<br>
+7---F<br>
+8---P<br>
+9---D<br>
+10--X<br>
+11--B<br>
+12--N<br>
+13--J<br>
+14--Z<br>
+15--S<br>
+16--Q<br>
+17--V<br>
+18--H<br>
+19--L<br>
+20--C<br>
+21--K<br>
+22--E<br>
 
 Ejercicio 5
 
@@ -74,6 +52,6 @@ Crea un programa que simule un bingo. Cada vez que se pulse 1, el programa saca 
 
 Ejercicio 6
 
-Implementar en java un algoritmo que genere números primos hasta la cantidad máxima especificada por el usuario. Utilícese el algoritmo denominado Criba de erastóstes.
-Descripción del algoritmo:
+Implementar en java un algoritmo que genere números primos hasta la cantidad máxima especificada por el usuario. Utilícese el algoritmo denominado Criba de erastóstes.<br>
+Descripción del algoritmo:<br>
 Dada una matriz de enteros empezando por el numero 2, se tachan los múltiplos de 2. Se busca el siguiente entero sin tachar y se tachan todos los múltiplos. Repetir hasta superar la raiz cuadrada del valor máximo.  
