@@ -141,6 +141,7 @@ public class Ejercicios05 {
         }
         return -1;        
     }    
+    
     public static void ejercicio03(){
         Scanner sc = new Scanner(System.in);
         int num = -1;
