@@ -27,11 +27,6 @@ public class Ejercicios05 {
             System.out.println("*  4. Calcular letra DNI                         *");
             System.out.println("*  5. Bingo                                      *");
             System.out.println("*  6. Primos                                     *");
-            System.out.println("*  7. ...                                        *");
-            System.out.println("*  8. ...                                        *");
-            System.out.println("*  9. ...                                        *");
-            System.out.println("* 10. ...                                        *");
-            System.out.println("* 11. ...                                        *");
             System.out.println("*  0. Salir                                      *");
             System.out.println("**************************************************");
             entradaUsuario = teclado.nextLine();
@@ -53,21 +48,6 @@ public class Ejercicios05 {
                     break;
                 case "6":
                     ejercicio06();
-                    break;
-                case "7":
-                    ejercicio07();
-                    break;
-                case "8":
-                    ejercicio08();
-                    break;
-                case "9":
-                    ejercicio09();
-                    break;
-                case "10":
-                    ejercicio10();
-                    break;
-                case "11":
-                    ejercicio11();
                     break;
                 case "0":
                     break;
@@ -160,7 +140,7 @@ public class Ejercicios05 {
             }
         }
         return -1;        
-    }
+    }    
     public static void ejercicio03(){
         Scanner sc = new Scanner(System.in);
         int num = -1;
@@ -180,7 +160,7 @@ public class Ejercicios05 {
     public static int[] arrayAleatorio2(int n){
         int result[];
         result = new int[n];
-        boolean existe = false;
+        boolean existe;
         for(int i = 0; i < result.length; i++){            
             do{
                 int a = (int)(Math.random()*n + 1);
@@ -235,7 +215,7 @@ public class Ejercicios05 {
             System.out.println("0 - salir");
             num = sc.nextLine();
             switch(num){
-                case "1":
+                case "1": 
                     System.out.printf("Sale la bola: %s\n", listaArray[n-1]);
                     System.out.printf("[" + lista + "]\n");
                     lista = lista + ", " + listaArray[n];
@@ -308,26 +288,6 @@ public class Ejercicios05 {
             }
         }
         return result;
-    }
-    
-    public static void ejercicio07(){
-        
-    }
-    
-    public static void ejercicio08(){
-        
-    }
-    
-    public static void ejercicio09(){
-        
-    }
-    
-    public static void ejercicio10(){
-        
-    }
-        
-    public static void ejercicio11(){
-        
     }
         
 }
