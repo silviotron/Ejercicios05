@@ -416,5 +416,14 @@ public class Ejercicios05 {
         return primera || segunda || tercera;
         
     }
+    public static void printCarton(int[] numeros, boolean[] tachados){
+        for (int i = 0; i < numeros.length; i++) {
+            if(tachados[i] = true){
+                //tachar el numero
+            }
+            
+        }
+        
+    }
 }    
 
