@@ -62,7 +62,7 @@ public class Ejercicios05 {
         Scanner sc = new Scanner(System.in);
         int tamArray = -1;
         do{
-            System.out.println("Por favor, inserte el tamaño del array");
+            System.out.print("Por favor, inserte el tamaño del array: ");
             if(sc.hasNextInt()){
                 tamArray = sc.nextInt();                
             }
@@ -105,7 +105,7 @@ public class Ejercicios05 {
         int num = -1;
         do{
             do{
-                System.out.println("Por favor, inserte un numero del 1 al 50, o 0 para salir:");
+                System.out.print("Por favor, inserte un numero del 1 al 50, o 0 para salir: ");
                 if(sc.hasNextInt()){
                     num = sc.nextInt();                
                 }
@@ -146,7 +146,7 @@ public class Ejercicios05 {
         Scanner sc = new Scanner(System.in);
         int num = -1;
         do{
-            System.out.println("Por favor, inserte un número:");
+            System.out.print("Por favor, inserte un número: ");
             if(sc.hasNextInt()){
                 num = sc.nextInt();                
             }
@@ -162,16 +162,14 @@ public class Ejercicios05 {
         int result[];
         result = new int[n];
         boolean existe;
+        int random;
         for(int i = 0; i < result.length; i++){            
             do{
-                int a = (int)(Math.random()*n + 1);
-                existe = existeEnArray(a, result);
-                if(!existe){
-                    result[i] = a;
-                }
-               
+                random = (int)(Math.random()*n + 1);
+                existe = existeEnArray(random, result);               
             }
             while(existe);
+            result[i] = random;
         }
         return result;
     }
@@ -188,7 +186,7 @@ public class Ejercicios05 {
         Scanner sc = new Scanner(System.in);
         int num = -1;
         do{
-            System.out.println("Por favor, introduce un numero de DNI:");
+            System.out.print("Por favor, introduce un numero de DNI: ");
             if(sc.hasNextInt()){
                 num = sc.nextInt();                
             }
@@ -211,15 +209,30 @@ public class Ejercicios05 {
         String num;
         String lista = "" + listaArray[0];
         Scanner sc = new Scanner(System.in);   
+        int[] cartonNumeros = arrayAleatorio3();
+        boolean[] cartonTachados = new boolean[15];
+        int posicionLinea = posLinea(listaArray, cartonNumeros, cartonTachados);
+        int posicionBingo = posBingo(listaArray, cartonNumeros, cartonTachados);
+        System.out.println(posicionLinea);
+        System.out.println(posicionBingo);            
+        
         do{
-            System.out.println("1 - siguiente numero");
-            System.out.println("0 - salir");
+            System.out.println("***********************");            
+            System.out.println("*  1. Sacar bola      *");
+            System.out.println("*  0. Terminar        *");
+            System.out.println("***********************");            
             num = sc.nextLine();
             switch(num){
                 case "1": 
                     System.out.printf("Sale la bola: %s\n", listaArray[n-1]);
                     System.out.printf("[" + lista + "]\n");
                     lista = lista + ", " + listaArray[n];
+                    if(n == posicionLinea){
+                        System.out.println("LINEA");
+                    }
+                    if(n == posicionBingo){
+                        System.out.println("BINGO");
+                    }
                     n++;
                     if(n == 90){
                         System.out.println("No hay mas bolas");
@@ -238,7 +251,47 @@ public class Ejercicios05 {
         }
         while(!num.equals("0") && n != 90);
     }
-    
+    public static int posBingo(int[] listaArray, int[] cartonNumeros, boolean[] cartonTachados){
+        int posicion = -1;
+        for(int i = 0; i < listaArray.length; i++){
+            if(existeEnArray(listaArray[i], cartonNumeros)){
+                cartonTachados[posicionEnArray(listaArray[i], cartonNumeros)] = true;
+            }
+            if(todosTachados(cartonTachados)){
+                posicion = i;
+                break;
+            }
+        }                        
+        return posicion;
+    }
+    public static int posLinea(int[] listaArray, int[] cartonNumeros, boolean[] cartonTachados){
+        int posicion = -1;
+        for(int i = 0; i < listaArray.length; i++){
+            if(existeEnArray(listaArray[i], cartonNumeros)){
+                cartonTachados[posicionEnArray(listaArray[i], cartonNumeros)] = true;
+            }
+            if(lineaTachados(cartonTachados)){
+                posicion = i;
+                break;
+            }
+        }                        
+        return posicion;
+    }
+    public static int[] arrayAleatorio3(){
+        int result[];
+        result = new int[15];
+        boolean existe;
+        int random;
+        for(int i = 0; i < result.length; i++){            
+            do{
+                random = (int)(Math.random()*90 + 1);
+                existe = existeEnArray(random, result);               
+            }
+            while(existe);
+            result[i] = random;
+        }
+        return result;
+    }    
     public static void ejercicio06(){
         Scanner sc = new Scanner(System.in);
         int num = -1;
@@ -290,5 +343,46 @@ public class Ejercicios05 {
         }
         return result;
     }
+    public static int posicionEnArray(int n, int[] array){
+        int posicion = -1;
+        for (int i = 0; i < array.length; i++) {
+            if(n == array[i]){
+                posicion = i;
+            }            
+        }
+        return posicion;
+    }
+    public static boolean todosTachados(boolean[] array){
+        for (int i = 0; i < array.length; i++) {
+            if(array[i] == false){
+                return false;
+            }
+            
+        }
+        return true;
         
-}
+    }
+    public static boolean lineaTachados(boolean[] array){
+        boolean primera = true;
+        boolean segunda = true;
+        boolean tercera = true;
+        for (int i = 0; i < 5; i++) {
+            if(array[i] == false){
+                primera = false;
+            }            
+        }
+        for (int i = 5; i < 10; i++) {
+            if(array[i] == false){
+                segunda = false;
+            }            
+        }
+        for (int i = 10; i < 15; i++) {
+            if(array[i] == false){
+                tercera = false;
+            }            
+        }
+        return primera || segunda || tercera;
+        
+    }
+}    
+
