@@ -206,16 +206,49 @@ public class Ejercicios05 {
     public static void ejercicio05(){
         int[] listaArray = arrayAleatorio2(90);
         int n = 1;
+        int posicionLinea = -1;
+        int posicionBingo = -1;
+        String ganadorLinea = "error";
+        String ganadorBingo = "error";
         String num;
         String lista = "" + listaArray[0];
-        Scanner sc = new Scanner(System.in);   
-        int[] cartonNumeros = arrayAleatorio3();
-        boolean[] cartonTachados = new boolean[15];
-        int posicionLinea = posLinea(listaArray, cartonNumeros, cartonTachados);
-        int posicionBingo = posBingo(listaArray, cartonNumeros, cartonTachados);
-        System.out.println(posicionLinea);
-        System.out.println(posicionBingo);            
+        Scanner sc = new Scanner(System.in); 
+        System.out.print("Introduce el nombre del primer usuario: ");        
+        String usuario1 = sc.nextLine();
+        System.out.print("Introduce el nombre del segundo usuario: ");
+        String usuario2 = sc.nextLine();
+        int[] cartonNumeros1 = arrayAleatorio3();
+        boolean[] cartonTachados1 = new boolean[15];
+        int posicionLinea1 = posLinea(listaArray, cartonNumeros1, cartonTachados1);
+        int posicionBingo1 = posBingo(listaArray, cartonNumeros1, cartonTachados1);  
         
+        int[] cartonNumeros2 = arrayAleatorio3();
+        boolean[] cartonTachados2 = new boolean[15];
+        int posicionLinea2 = posLinea(listaArray, cartonNumeros2, cartonTachados2);
+        int posicionBingo2 = posBingo(listaArray, cartonNumeros2, cartonTachados2);
+        
+        if(posicionLinea1 == posicionLinea2){
+            posicionLinea = posicionLinea1;
+            ganadorLinea = usuario1 + " y " + usuario2 + ", han cantado linea a la vez";
+        }else if(posicionLinea1 > posicionLinea2){
+            posicionLinea = posicionLinea1;
+            ganadorLinea = usuario1 + " ha cantado linea";
+        }else if(posicionLinea1 < posicionLinea2){
+            posicionLinea = posicionLinea2;
+            ganadorLinea = usuario2 + " ha cantado linea";
+        }
+        
+        if(posicionBingo1 == posicionBingo2){
+            posicionBingo = posicionBingo1;
+            ganadorBingo = usuario1 + " y " + usuario2 + ", han cantado Bingo a la vez";
+        }else if(posicionBingo1 > posicionBingo2){
+            posicionBingo = posicionBingo1;
+            ganadorBingo = usuario1 + " ha cantado bingo";
+        }else if(posicionBingo1 < posicionBingo2){
+            posicionBingo = posicionBingo2;
+            ganadorBingo = usuario2 + " ha cantado bingo";
+        }        
+        System.out.println("kk");
         do{
             System.out.println("***********************");            
             System.out.println("*  1. Sacar bola      *");
@@ -228,10 +261,10 @@ public class Ejercicios05 {
                     System.out.printf("[" + lista + "]\n");
                     lista = lista + ", " + listaArray[n];
                     if(n == posicionLinea){
-                        System.out.println("LINEA");
+                        System.out.println(ganadorLinea);
                     }
                     if(n == posicionBingo){
-                        System.out.println("BINGO");
+                        System.out.println(ganadorBingo);
                     }
                     n++;
                     if(n == 90){
