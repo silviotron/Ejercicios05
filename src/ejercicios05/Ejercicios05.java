@@ -230,10 +230,10 @@ public class Ejercicios05 {
         if(posicionLinea1 == posicionLinea2){
             posicionLinea = posicionLinea1;
             ganadorLinea = usuario1 + " y " + usuario2 + ", han cantado linea a la vez";
-        }else if(posicionLinea1 > posicionLinea2){
+        }else if(posicionLinea1 < posicionLinea2){
             posicionLinea = posicionLinea1;
             ganadorLinea = usuario1 + " ha cantado linea";
-        }else if(posicionLinea1 < posicionLinea2){
+        }else if(posicionLinea1 > posicionLinea2){
             posicionLinea = posicionLinea2;
             ganadorLinea = usuario2 + " ha cantado linea";
         }
@@ -241,14 +241,13 @@ public class Ejercicios05 {
         if(posicionBingo1 == posicionBingo2){
             posicionBingo = posicionBingo1;
             ganadorBingo = usuario1 + " y " + usuario2 + ", han cantado Bingo a la vez";
-        }else if(posicionBingo1 > posicionBingo2){
+        }else if(posicionBingo1 < posicionBingo2){
             posicionBingo = posicionBingo1;
             ganadorBingo = usuario1 + " ha cantado bingo";
-        }else if(posicionBingo1 < posicionBingo2){
+        }else if(posicionBingo1 > posicionBingo2){
             posicionBingo = posicionBingo2;
             ganadorBingo = usuario2 + " ha cantado bingo";
         }        
-        System.out.println("kk");
         do{
             System.out.println("***********************");            
             System.out.println("*  1. Sacar bola      *");
