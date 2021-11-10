@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author silvi
+ * @author silvio
  */
 public class Ejercicios05 {
 
@@ -215,17 +215,21 @@ public class Ejercicios05 {
         Scanner sc = new Scanner(System.in); 
         System.out.print("Introduce el nombre del primer usuario: ");        
         String usuario1 = sc.nextLine();
-        System.out.print("Introduce el nombre del segundo usuario: ");
-        String usuario2 = sc.nextLine();
         int[] cartonNumeros1 = arrayAleatorio3();
         boolean[] cartonTachados1 = new boolean[15];
         int posicionLinea1 = posLinea(listaArray, cartonNumeros1, cartonTachados1);
-        int posicionBingo1 = posBingo(listaArray, cartonNumeros1, cartonTachados1);  
+        int posicionBingo1 = posBingo(listaArray, cartonNumeros1, cartonTachados1); 
+        cartonTachados1 = todoFalse(cartonTachados1);       
+        printCarton(cartonNumeros1, cartonTachados1, usuario1);        
         
+        System.out.print("Introduce el nombre del segundo usuario: ");
+        String usuario2 = sc.nextLine();       
         int[] cartonNumeros2 = arrayAleatorio3();
         boolean[] cartonTachados2 = new boolean[15];
         int posicionLinea2 = posLinea(listaArray, cartonNumeros2, cartonTachados2);
         int posicionBingo2 = posBingo(listaArray, cartonNumeros2, cartonTachados2);
+        cartonTachados2 = todoFalse(cartonTachados2);         
+        printCarton(cartonNumeros2, cartonTachados2, usuario2);
         
         if(posicionLinea1 == posicionLinea2){
             posicionLinea = posicionLinea1;
@@ -247,7 +251,7 @@ public class Ejercicios05 {
         }else if(posicionBingo1 > posicionBingo2){
             posicionBingo = posicionBingo2;
             ganadorBingo = usuario2 + " ha cantado bingo";
-        }        
+        }
         do{
             System.out.println("***********************");            
             System.out.println("*  1. Sacar bola      *");
@@ -256,8 +260,8 @@ public class Ejercicios05 {
             num = sc.nextLine();
             switch(num){
                 case "1": 
-                    System.out.printf("Sale la bola: %s\n", listaArray[n-1]);
-                    System.out.printf("[" + lista + "]\n");
+                    System.out.printf("Sale la bola: %s\n", listaArray[n - 1]);
+                    System.out.printf("ya salieron: [" + lista + "]\n");
                     lista = lista + ", " + listaArray[n];
                     if(n == posicionLinea){
                         System.out.println(ganadorLinea);
@@ -265,6 +269,10 @@ public class Ejercicios05 {
                     if(n == posicionBingo){
                         System.out.println(ganadorBingo);
                     }
+                    cartonTachados1 = tachar(listaArray[n - 1], cartonNumeros1, cartonTachados1);
+                    cartonTachados2 = tachar(listaArray[n - 1], cartonNumeros2, cartonTachados2);
+                    printCarton(cartonNumeros1, cartonTachados1, usuario1);
+                    printCarton(cartonNumeros2, cartonTachados2, usuario2);
                     n++;
                     if(n == 90){
                         System.out.println("No hay mas bolas");
@@ -416,14 +424,60 @@ public class Ejercicios05 {
         return primera || segunda || tercera;
         
     }
-    public static void printCarton(int[] numeros, boolean[] tachados){
+    public static void printCarton(int[] numeros, boolean[] tachados, String usuario){
+        System.out.printf("carton de %s: \n",usuario);
+        System.out.println("**************************************");
+        int fila = 0;
+        String print;
         for (int i = 0; i < numeros.length; i++) {
-            if(tachados[i] = true){
-                //tachar el numero
+            if(fila == 5){
+                System.out.print("\n");
+                fila = 0;
+            }
+            switch(numeros[i]){
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                case 8:
+                case 9:
+                    print = " " + numeros[i];
+                    break;
+                default:
+                    print = "" + numeros[i];
+                    break;
+                    
+            }
+            if(tachados[i] == false){
+                print = " " + print + " ";
+            }else{
+                print = "(" + print + ")";    
+            }
+            System.out.print("   " + print);
+            fila++;
+        }
+        System.out.print("\n");
+        System.out.println("**************************************\n\n");
+        
+    }
+    public static boolean[] todoFalse(boolean[] tachados){                
+        for (int i = 0; i < tachados.length; i++) {
+            tachados[i] = false;            
+        }        
+        return tachados;
+    }
+    public static boolean[] tachar(int numero, int[] cartonNumeros, boolean[] cartonTachados){
+        for (int i = 0; i < cartonNumeros.length; i++) {
+            if(cartonNumeros[i] == numero){
+                cartonTachados[i] = true;
             }
             
         }
         
+        return cartonTachados;
     }
 }    
 
