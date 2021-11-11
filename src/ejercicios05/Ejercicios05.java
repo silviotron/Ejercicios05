@@ -261,12 +261,12 @@ public class Ejercicios05 {
             switch(num){
                 case "1": 
                     System.out.printf("Sale la bola: %s\n", listaArray[n - 1]);
-                    System.out.printf("ya salieron: [" + lista + "]\n");
+                    System.out.printf("ya salieron: [" + lista + "]\n\n");
                     lista = lista + ", " + listaArray[n];
-                    if(n == posicionLinea){
+                    if(n == posicionLinea + 1){
                         System.out.println(ganadorLinea);
                     }
-                    if(n == posicionBingo){
+                    if(n == posicionBingo + 1){
                         System.out.println(ganadorBingo);
                     }
                     cartonTachados1 = tachar(listaArray[n - 1], cartonNumeros1, cartonTachados1);
@@ -332,66 +332,6 @@ public class Ejercicios05 {
         }
         return result;
     }    
-    public static void ejercicio06(){
-        Scanner sc = new Scanner(System.in);
-        int num = -1;
-        do{
-            System.out.print("Por favor, introduce un numero: ");
-            if(sc.hasNextInt()){
-                num = sc.nextInt();                
-            }
-            if(num < 0){
-                System.out.println("ERROR: Debe insertar un número natural.");
-            }
-            sc.nextLine();
-        }
-        while(num < 0);        
-        boolean[] criba = new boolean[num + 1];
-        for(int i = 2; i < criba.length; i++){
-            if((criba[i] == false) && (Math.pow(i, 2) < num)){
-                criba = tacharMultiplos(criba, i);
-            }
-        }
-        int encontrados = encontrados(criba);
-        if(encontrados > 1){ 
-            System.out.printf("primos encontrados hasta el %s:\n(encontrados: %s) 2", num, encontrados); 
-        }else{
-            System.out.printf("no se han encontrados primos hasta el %s", num);
-        }       
-        for(int i = 3; i < criba.length; i++){
-            if(criba[i] == false){                
-                System.out.printf(", %s", i);
-            }
-        }
-        System.out.printf("\n");
-    }
-    public static boolean[] tacharMultiplos(boolean[] array, int m){                
-        final boolean tachado = true;
-        for(int i = m + 1; i < array.length; i++){
-            if(i % m == 0){
-                array[i] = tachado;
-            }
-        }
-        return array;
-    }
-    public static int encontrados(boolean[] array){
-        int result = 0;
-        for(int i = 2; i < array.length; i++){
-            if(array[i] == false){
-                result++;
-            }
-        }
-        return result;
-    }
-    public static int posicionEnArray(int n, int[] array){
-        int posicion = -1;
-        for (int i = 0; i < array.length; i++) {
-            if(n == array[i]){
-                posicion = i;
-            }            
-        }
-        return posicion;
-    }
     public static boolean todosTachados(boolean[] array){
         for (int i = 0; i < array.length; i++) {
             if(array[i] == false){
@@ -478,6 +418,68 @@ public class Ejercicios05 {
         }
         
         return cartonTachados;
+    }    
+    public static int posicionEnArray(int n, int[] array){
+        int posicion = -1;
+        for (int i = 0; i < array.length; i++) {
+            if(n == array[i]){
+                posicion = i;
+            }            
+        }
+        return posicion;
     }
+    
+    public static void ejercicio06(){
+        Scanner sc = new Scanner(System.in);
+        int num = -1;
+        do{
+            System.out.print("Por favor, introduce un numero: ");
+            if(sc.hasNextInt()){
+                num = sc.nextInt();                
+            }
+            if(num < 0){
+                System.out.println("ERROR: Debe insertar un número natural.");
+            }
+            sc.nextLine();
+        }
+        while(num < 0);        
+        boolean[] criba = new boolean[num + 1];
+        for(int i = 2; i < criba.length; i++){
+            if((criba[i] == false) && (Math.pow(i, 2) < num)){
+                criba = tacharMultiplos(criba, i);
+            }
+        }
+        int encontrados = encontrados(criba);
+        if(encontrados > 1){ 
+            System.out.printf("primos encontrados hasta el %s:\n(encontrados: %s) 2", num, encontrados); 
+        }else{
+            System.out.printf("no se han encontrados primos hasta el %s", num);
+        }       
+        for(int i = 3; i < criba.length; i++){
+            if(criba[i] == false){                
+                System.out.printf(", %s", i);
+            }
+        }
+        System.out.printf("\n");
+    }
+    public static boolean[] tacharMultiplos(boolean[] array, int m){                
+        final boolean tachado = true;
+        for(int i = m + 1; i < array.length; i++){
+            if(i % m == 0){
+                array[i] = tachado;
+            }
+        }
+        return array;
+    }
+    public static int encontrados(boolean[] array){
+        int result = 0;
+        for(int i = 2; i < array.length; i++){
+            if(array[i] == false){
+                result++;
+            }
+        }
+        return result;
+    }
+
 }    
 
