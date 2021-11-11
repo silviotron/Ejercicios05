@@ -213,8 +213,11 @@ public class Ejercicios05 {
         String num;
         String lista = "" + listaArray[0];
         Scanner sc = new Scanner(System.in); 
-        System.out.print("Introduce el nombre del primer usuario: ");        
-        String usuario1 = sc.nextLine();
+        int numUsuarios = sc.nextInt();
+        int[][] cartonesUsuarios = crearCartones(numUsuarios);
+        String[] nombres = nombresUsuarios(numUsuarios);
+        int[][] ganadores = calcGanadores(listaArray, cartonesUsuarios, numUsuarios)
+
         int[] cartonNumeros1 = arrayAleatorio3();
         boolean[] cartonTachados1 = new boolean[15];
         int posicionLinea1 = posLinea(listaArray, cartonNumeros1, cartonTachados1);
@@ -222,8 +225,7 @@ public class Ejercicios05 {
         cartonTachados1 = todoFalse(cartonTachados1);       
         printCarton(cartonNumeros1, cartonTachados1, usuario1);        
         
-        System.out.print("Introduce el nombre del segundo usuario: ");
-        String usuario2 = sc.nextLine();       
+      
         int[] cartonNumeros2 = arrayAleatorio3();
         boolean[] cartonTachados2 = new boolean[15];
         int posicionLinea2 = posLinea(listaArray, cartonNumeros2, cartonTachados2);
@@ -427,6 +429,72 @@ public class Ejercicios05 {
             }            
         }
         return posicion;
+    }
+    public static int[][] crearCartones(int num){
+        int[][] cartones = new int[num][15];
+        boolean existe;
+        int random;
+        for (int i = 0; i < num; i++) {
+            for (int j = 0; j < 14; j++) {
+                do{
+                random = (int)(Math.random()*90 + 1);
+                existe = existeEnArray(random, cartones[i]);               
+                }
+                while(existe);
+                cartones[i][j] = random;
+                
+            }
+            
+        }        
+        
+        return cartones;
+    }
+    public static String[] nombresUsuarios(int n){
+        Scanner sc = new Scanner(System.in); 
+        String[] nombres = new String[n];
+        for (int i = 0; i < nombres.length; i++) {
+            System.out.printf("Introduce el nombre del %sº usuario: ", i);
+            nombres[i] = sc.nextLine();
+        }
+        
+        return nombres;
+    }
+    //[0][0] es el ganador de la linea, [0][1] es la posicion de la linea
+    //[1][0] es el ganador del bingo, [1][1] es la posicion del bingo
+    public static int[][] calcGanadores(int[][] cartones, int[] lista, int num){
+        boolean bingo = true;
+        boolean linea = true;
+        int finalLinea = 0;
+
+        boolean [][] tachados = new boolean[num][15];
+        int[][] ganadores = new int[2][2];
+        for (int i = 0; i < lista.length; i++) {
+            for (int j = 0; j < num; j++) {
+                for (int k = 0; k < 15; k++) {
+                    if(cartones[j][k] == lista[i]){
+                        tachados[j][k] = true;
+                    }
+                    
+                }
+                
+            }
+            for (int j = 0; j < num; j++) {
+                for (int k = 0; k < 15; k++) {
+                    bingo = bingo && tachados[j][k];  
+                    
+                }
+                
+            }
+            for (int j = 0; j < num; j++) {
+                for (int k = 0; k < 15; k++) {
+                     
+                    
+                }
+                
+            }            
+        }
+        
+        return ganadores;
     }
     
     public static void ejercicio06(){
