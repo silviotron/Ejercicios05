@@ -213,47 +213,12 @@ public class Ejercicios05 {
         String num;
         String lista = "" + listaArray[0];
         Scanner sc = new Scanner(System.in); 
+        System.out.print("Introduce el numero de jugadores: ");
         int numUsuarios = sc.nextInt();
         int[][] cartonesUsuarios = crearCartones(numUsuarios);
-        String[] nombres = nombresUsuarios(numUsuarios);
-        int[][] ganadores = calcGanadores(listaArray, cartonesUsuarios, numUsuarios)
-
-        int[] cartonNumeros1 = arrayAleatorio3();
-        boolean[] cartonTachados1 = new boolean[15];
-        int posicionLinea1 = posLinea(listaArray, cartonNumeros1, cartonTachados1);
-        int posicionBingo1 = posBingo(listaArray, cartonNumeros1, cartonTachados1); 
-        cartonTachados1 = todoFalse(cartonTachados1);       
-        printCarton(cartonNumeros1, cartonTachados1, usuario1);        
-        
-      
-        int[] cartonNumeros2 = arrayAleatorio3();
-        boolean[] cartonTachados2 = new boolean[15];
-        int posicionLinea2 = posLinea(listaArray, cartonNumeros2, cartonTachados2);
-        int posicionBingo2 = posBingo(listaArray, cartonNumeros2, cartonTachados2);
-        cartonTachados2 = todoFalse(cartonTachados2);         
-        printCarton(cartonNumeros2, cartonTachados2, usuario2);
-        
-        if(posicionLinea1 == posicionLinea2){
-            posicionLinea = posicionLinea1;
-            ganadorLinea = usuario1 + " y " + usuario2 + ", han cantado linea a la vez";
-        }else if(posicionLinea1 < posicionLinea2){
-            posicionLinea = posicionLinea1;
-            ganadorLinea = usuario1 + " ha cantado linea";
-        }else if(posicionLinea1 > posicionLinea2){
-            posicionLinea = posicionLinea2;
-            ganadorLinea = usuario2 + " ha cantado linea";
-        }
-        
-        if(posicionBingo1 == posicionBingo2){
-            posicionBingo = posicionBingo1;
-            ganadorBingo = usuario1 + " y " + usuario2 + ", han cantado Bingo a la vez";
-        }else if(posicionBingo1 < posicionBingo2){
-            posicionBingo = posicionBingo1;
-            ganadorBingo = usuario1 + " ha cantado bingo";
-        }else if(posicionBingo1 > posicionBingo2){
-            posicionBingo = posicionBingo2;
-            ganadorBingo = usuario2 + " ha cantado bingo";
-        }
+        String[] nombres = nombresUsuarios(numUsuarios, cartonesUsuarios);
+        int[][] ganadores = calcGanadores(cartonesUsuarios, listaArray, numUsuarios);
+                                   
         do{
             System.out.println("***********************");            
             System.out.println("*  1. Sacar bola      *");
@@ -271,10 +236,6 @@ public class Ejercicios05 {
                     if(n == posicionBingo + 1){
                         System.out.println(ganadorBingo);
                     }
-                    cartonTachados1 = tachar(listaArray[n - 1], cartonNumeros1, cartonTachados1);
-                    cartonTachados2 = tachar(listaArray[n - 1], cartonNumeros2, cartonTachados2);
-                    printCarton(cartonNumeros1, cartonTachados1, usuario1);
-                    printCarton(cartonNumeros2, cartonTachados2, usuario2);
                     n++;
                     if(n == 90){
                         System.out.println("No hay mas bolas");
@@ -292,33 +253,7 @@ public class Ejercicios05 {
 
         }
         while(!num.equals("0") && n != 90);
-    }
-    public static int posBingo(int[] listaArray, int[] cartonNumeros, boolean[] cartonTachados){
-        int posicion = -1;
-        for(int i = 0; i < listaArray.length; i++){
-            if(existeEnArray(listaArray[i], cartonNumeros)){
-                cartonTachados[posicionEnArray(listaArray[i], cartonNumeros)] = true;
-            }
-            if(todosTachados(cartonTachados)){
-                posicion = i;
-                break;
-            }
-        }                        
-        return posicion;
-    }
-    public static int posLinea(int[] listaArray, int[] cartonNumeros, boolean[] cartonTachados){
-        int posicion = -1;
-        for(int i = 0; i < listaArray.length; i++){
-            if(existeEnArray(listaArray[i], cartonNumeros)){
-                cartonTachados[posicionEnArray(listaArray[i], cartonNumeros)] = true;
-            }
-            if(lineaTachados(cartonTachados)){
-                posicion = i;
-                break;
-            }
-        }                        
-        return posicion;
-    }
+    }   
     public static int[] arrayAleatorio3(){
         int result[];
         result = new int[15];
@@ -334,9 +269,9 @@ public class Ejercicios05 {
         }
         return result;
     }    
-    public static boolean todosTachados(boolean[] array){
-        for (int i = 0; i < array.length; i++) {
-            if(array[i] == false){
+    public static boolean todosTachados(boolean[][] array, int num){
+        for (int i = 0; i < 15; i++) {
+            if(array[num][i] == false){
                 return false;
             }
             
@@ -344,29 +279,29 @@ public class Ejercicios05 {
         return true;
         
     }
-    public static boolean lineaTachados(boolean[] array){
+    public static boolean lineaTachados(boolean[][] array, int num){
         boolean primera = true;
         boolean segunda = true;
         boolean tercera = true;
         for (int i = 0; i < 5; i++) {
-            if(array[i] == false){
+            if(array[num][i] == false){
                 primera = false;
             }            
         }
         for (int i = 5; i < 10; i++) {
-            if(array[i] == false){
+            if(array[num][i] == false){
                 segunda = false;
             }            
         }
         for (int i = 10; i < 15; i++) {
-            if(array[i] == false){
+            if(array[num][i] == false){
                 tercera = false;
             }            
         }
         return primera || segunda || tercera;
         
     }
-    public static void printCarton(int[] numeros, boolean[] tachados, String usuario){
+    public static void printCarton(int[][] numeros, boolean[][] tachados, int num, String[] nombres){
         System.out.printf("carton de %s: \n",usuario);
         System.out.println("**************************************");
         int fila = 0;
@@ -376,7 +311,7 @@ public class Ejercicios05 {
                 System.out.print("\n");
                 fila = 0;
             }
-            switch(numeros[i]){
+            switch(numeros[num][i]){
                 case 1:
                 case 2:
                 case 3:
@@ -393,7 +328,7 @@ public class Ejercicios05 {
                     break;
                     
             }
-            if(tachados[i] == false){
+            if(tachados[num][i] == false){
                 print = " " + print + " ";
             }else{
                 print = "(" + print + ")";    
@@ -435,7 +370,7 @@ public class Ejercicios05 {
         boolean existe;
         int random;
         for (int i = 0; i < num; i++) {
-            for (int j = 0; j < 14; j++) {
+            for (int j = 0; j < 15; j++) {
                 do{
                 random = (int)(Math.random()*90 + 1);
                 existe = existeEnArray(random, cartones[i]);               
@@ -449,12 +384,13 @@ public class Ejercicios05 {
         
         return cartones;
     }
-    public static String[] nombresUsuarios(int n){
+    public static String[] nombresUsuarios(int n, int[][] cartones){
         Scanner sc = new Scanner(System.in); 
         String[] nombres = new String[n];
         for (int i = 0; i < nombres.length; i++) {
-            System.out.printf("Introduce el nombre del %sº usuario: ", i);
+            System.out.printf("Introduce el nombre del %sº usuario: ", i + 1);
             nombres[i] = sc.nextLine();
+            printCarton()//seguir por aqui
         }
         
         return nombres;
@@ -462,13 +398,12 @@ public class Ejercicios05 {
     //[0][0] es el ganador de la linea, [0][1] es la posicion de la linea
     //[1][0] es el ganador del bingo, [1][1] es la posicion del bingo
     public static int[][] calcGanadores(int[][] cartones, int[] lista, int num){
-        boolean bingo = true;
-        boolean linea = true;
-        int finalLinea = 0;
+        boolean linea = false;
+        boolean bingo = false;
 
         boolean [][] tachados = new boolean[num][15];
         int[][] ganadores = new int[2][2];
-        for (int i = 0; i < lista.length; i++) {
+        for (int i = 0; i < lista.length; i++) {            
             for (int j = 0; j < num; j++) {
                 for (int k = 0; k < 15; k++) {
                     if(cartones[j][k] == lista[i]){
@@ -476,22 +411,19 @@ public class Ejercicios05 {
                     }
                     
                 }
-                
-            }
-            for (int j = 0; j < num; j++) {
-                for (int k = 0; k < 15; k++) {
-                    bingo = bingo && tachados[j][k];  
-                    
+                if(lineaTachados(tachados, j) && !linea){
+                    ganadores[0][0] = j;
+                    ganadores[0][1] = i;
+                    linea = true;
                 }
-                
-            }
-            for (int j = 0; j < num; j++) {
-                for (int k = 0; k < 15; k++) {
-                     
-                    
+                if(todosTachados(tachados, j) && !bingo){
+                    ganadores[1][0] = j;
+                    ganadores[1][1] = i;
+                    bingo = true;
                 }
-                
-            }            
+            }
+            
+           
         }
         
         return ganadores;
