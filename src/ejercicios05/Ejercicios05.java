@@ -216,7 +216,8 @@ public class Ejercicios05 {
         System.out.print("Introduce el numero de jugadores: ");
         int numUsuarios = sc.nextInt();
         int[][] cartonesUsuarios = crearCartones(numUsuarios);
-        String[] nombres = nombresUsuarios(numUsuarios, cartonesUsuarios);
+        boolean[][] todoFalse = new boolean[numUsuarios][15];
+        String[] nombres = nombresUsuarios(numUsuarios, cartonesUsuarios, todoFalse);
         int[][] ganadores = calcGanadores(cartonesUsuarios, listaArray, numUsuarios);
                                    
         do{
@@ -302,11 +303,11 @@ public class Ejercicios05 {
         
     }
     public static void printCarton(int[][] numeros, boolean[][] tachados, int num, String[] nombres){
-        System.out.printf("carton de %s: \n",usuario);
+        System.out.printf("\ncarton de %s: \n", nombres[num]);
         System.out.println("**************************************");
         int fila = 0;
         String print;
-        for (int i = 0; i < numeros.length; i++) {
+        for (int i = 0; i < 15; i++) {
             if(fila == 5){
                 System.out.print("\n");
                 fila = 0;
@@ -321,10 +322,10 @@ public class Ejercicios05 {
                 case 7:
                 case 8:
                 case 9:
-                    print = " " + numeros[i];
+                    print = " " + numeros[num][i];
                     break;
                 default:
-                    print = "" + numeros[i];
+                    print = "" + numeros[num][i];
                     break;
                     
             }
@@ -337,7 +338,7 @@ public class Ejercicios05 {
             fila++;
         }
         System.out.print("\n");
-        System.out.println("**************************************\n\n");
+        System.out.println("**************************************\n");
         
     }
     public static boolean[] todoFalse(boolean[] tachados){                
@@ -384,13 +385,13 @@ public class Ejercicios05 {
         
         return cartones;
     }
-    public static String[] nombresUsuarios(int n, int[][] cartones){
+    public static String[] nombresUsuarios(int n, int[][] cartones, boolean[][] tachados){
         Scanner sc = new Scanner(System.in); 
         String[] nombres = new String[n];
         for (int i = 0; i < nombres.length; i++) {
             System.out.printf("Introduce el nombre del %sº usuario: ", i + 1);
             nombres[i] = sc.nextLine();
-            printCarton()//seguir por aqui
+            printCarton(cartones, tachados, i, nombres);//seguir por aqui
         }
         
         return nombres;
