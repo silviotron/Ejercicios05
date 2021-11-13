@@ -5,6 +5,7 @@
  */
 package ejercicios05;
 
+import static java.lang.Math.sqrt;
 import java.util.Scanner;
 
 /**
@@ -47,7 +48,7 @@ public class Ejercicios05 {
                     ejercicio05();
                     break;
                 case "6":
-                    ejercicio06();
+                    ejercicio06v2();
                     break;
                 case "0":
                     break;
@@ -446,7 +447,7 @@ public class Ejercicios05 {
         while(num < 0);        
         boolean[] criba = new boolean[num + 1];
         for(int i = 2; i < criba.length; i++){
-            if((criba[i] == false) && (Math.pow(i, 2) < num)){
+            if((Math.pow(i, 2) < num) && (criba[i] == false)){
                 criba = tacharMultiplos(criba, i);
             }
         }
@@ -481,6 +482,50 @@ public class Ejercicios05 {
         }
         return result;
     }
+    
+    public static void ejercicio06v2(){
+        System.out.println("Inserte el numero limite que desea calcular de numeros primos");
+        Scanner teclado = new Scanner(System.in);
+        int n = -1;
+        do {
+            if (teclado.hasNextInt()) {
+                n = teclado.nextInt();
+            }
+            if (n < 0) {
+                System.out.println("Debe insertar un numero entero");
+            }
+            teclado.nextLine();
+        } while (n < 0);
+        printearPrimos(primos2(n));
+        System.out.println("");
+    }
+    public static int[] primos2(int n) {
+        int[] array = new int[n - 1];
+        int borrador;
+        for (int i = 0; i < (array.length); i++) {
+            array[i] = i + 2;
+        }
+        int raiz = (int)sqrt(n);
+        for (int i = 0;i <= raiz; i++) {
+            if (array[i] != 0) {
+                borrador = array[i];
+                for (int j = borrador; j < array.length; j++) {
+                    if (array[j] != 0 && array[j] % borrador == 0) {
+                        array[j] = 0;
+                    }
+                }
+            }
+        }
+        return array;
+    }
+    public static void printearPrimos(int[] array) {
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] != 0) {
+                System.out.print("[" + array[i] + "]");
+            }
 
+        }
+    }        
+    
 }    
 
