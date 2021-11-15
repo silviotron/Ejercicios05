@@ -48,7 +48,7 @@ public class Ejercicios05 {
                     ejercicio05();
                     break;
                 case "6":
-                    ejercicio06v2();
+                    ejercicio06v3();
                     break;
                 case "0":
                     break;
@@ -590,7 +590,46 @@ public class Ejercicios05 {
             }
 
         }
-    }    
+    }   
+    //con un [] de boolean y en vez de resto, multiplicando asta que el resultado sea mayor que el maximo.
+    public static void ejercicio06v3(){
+        System.out.println("Inserte el numero limite que desea calcular de numeros primos");
+        Scanner teclado = new Scanner(System.in);
+        int n = -1;
+        do {
+            if (teclado.hasNextInt()) {
+                n = teclado.nextInt();
+            }
+            if (n < 0) {
+                System.out.println("Debe insertar un numero entero");
+            }
+            teclado.nextLine();
+        } while (n < 0);
+        printearPrimos3(primos3(n));
+        System.out.println("");        
+    }
+    public static boolean[] primos3(int n){
+        int raiz = (int)sqrt(n);
+        boolean[] array = new boolean[n];
+        for (int i = 2; i * i <= n; i++) {
+            for (int j = i; i * j < n; j++) {
+                array[i * j] = true;
+                
+            }
+            
+        }
+        
+        return array;
+    }
+    public static void printearPrimos3(boolean[] array){
+        for (int i = 2; i < array.length; i++) {
+            if(!array[i]){
+                System.out.print("[" + i + "]");
+            }
+            
+        }
+        
+    }
     
 }    
 
