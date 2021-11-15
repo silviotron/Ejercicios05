@@ -207,8 +207,6 @@ public class Ejercicios05 {
     public static void ejercicio05(){
         int[] listaArray = arrayAleatorio2(90);
         int n = 1;
-        String ganadorLinea = "error";
-        String ganadorBingo = "error";
         String num;
         String lista = "" + listaArray[0];
         Scanner sc = new Scanner(System.in); 
@@ -220,10 +218,7 @@ public class Ejercicios05 {
         int[] posGanadores = calcGanadores(cartonesUsuarios, listaArray, numUsuarios);
         int posicionLinea = posGanadores[0];
         int posicionBingo = posGanadores[1];
-        int cuantosLinea = 0;
-        int cuantosBingo = 0;
         String[] nombres = nombresUsuarios(numUsuarios, cartonesUsuarios, todoFalse);
-        //int[][] ganadores = calcGanadores(cartonesUsuarios, listaArray, numUsuarios);
         sc.nextLine();
         
         
@@ -242,12 +237,6 @@ public class Ejercicios05 {
                     printCartones(cartonesUsuarios, cartonesTachados, numUsuarios, nombres);
                     if(n == posicionLinea + 1){
                         boolean ganadoresLinea[] = ganadoresLinea(numUsuarios, cartonesTachados);
-                        for (int i = 0; i < ganadoresLinea.length; i++) {
-                            if(ganadoresLinea[i]){
-                                cuantosLinea++;
-                            }
-                            
-                        }
                         for (int i = 0; i < ganadoresLinea.length; i++) {
                             if(ganadoresLinea[i]){
                                 System.out.println(nombres[i] + " ha cantado linea");
@@ -368,12 +357,6 @@ public class Ejercicios05 {
         System.out.println("**************************************\n");
         
     }
-    public static boolean[] todoFalse(boolean[] tachados){                
-        for (int i = 0; i < tachados.length; i++) {
-            tachados[i] = false;            
-        }        
-        return tachados;
-    }
     public static boolean[][] tachar(int numero, int[][] cartonNumeros, boolean[][] cartonTachados, int numUsuarios){
         for (int i = 0; i < numUsuarios; i++) {
             for (int j = 0; j < 15; j++) {
@@ -388,15 +371,6 @@ public class Ejercicios05 {
         
         return cartonTachados;
     }    
-    public static int posicionEnArray(int n, int[] array){
-        int posicion = -1;
-        for (int i = 0; i < array.length; i++) {
-            if(n == array[i]){
-                posicion = i;
-            }            
-        }
-        return posicion;
-    }
     public static int[][] crearCartones(int num){
         int[][] cartones = new int[num][15];
         boolean existe;
